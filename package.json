@@ -2,7 +2,7 @@
   "name": "url-at-min",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Brinuz/url-at-minial.git"
+    "url": "git://github.com/Brinuz/url-at-minimal.git"
   },
   "version": "1.0.0",
   "description": "This is a pet project for an URL Minifier",
