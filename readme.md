@@ -1,1 +1,1 @@
-Bootstrap project for react using JS
+URL Minifier

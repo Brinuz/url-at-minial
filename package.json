@@ -1,25 +1,31 @@
 {
-  "name": "bootstrap-react-app",
+  "name": "url-at-min",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Brinuz/url-at-minial.git"
+  },
   "version": "1.0.0",
-  "description": "React JS Bootstrap",
+  "description": "This is a pet project for an URL Minifier",
   "main": "index.js",
   "scripts": {
+    "lint": "node node_modules\\eslint\\bin\\eslint.js .\\src\\**",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage --colors",
     "test:verbose": "jest --verbose",
+    "test:commit": "npm run lint && npm run test:verbose && npm outdated",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --hot --open --devtool source-map"
   },
   "author": "Bruno Monteiro",
   "license": "MIT",
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.6.4",
     "@babel/polyfill": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
@@ -27,16 +33,18 @@
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-hooks": "^2.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^24.7.1",
-    "webpack": "^4.30.0",
+    "jest": "^24.9.0",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.9.0"
   }
 }

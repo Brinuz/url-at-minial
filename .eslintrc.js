@@ -17,9 +17,12 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks",
+        "html"
     ],
     "rules": {
+        "linebreak-style": 0,
         "react/jsx-indent": ["error", 4],
         "indent": ["error", 4, { "ignoredNodes": ["JSXElement"] }],
     },
