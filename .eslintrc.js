@@ -24,7 +24,7 @@ module.exports = {
     "rules": {
         "linebreak-style": 0,
         "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
         "indent": ["error", 4, { "ignoredNodes": ["JSXElement"] }],
-    },
-    "parser": "babel-eslint"
+    }
 };
