@@ -9,7 +9,7 @@ const Minify = ({ api }) => {
 
     const displayMinified = () => {
         if (error) return <p>Couldn&apos;t minify url</p>;
-        return minified && <p>{minified}</p>;
+        return minified && <a href={minified}>{minified}</a>;
     };
 
     const onClickHandler = () => {

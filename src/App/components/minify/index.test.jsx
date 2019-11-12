@@ -10,7 +10,7 @@ describe('initial renders', () => {
         const wrapper = mount(<Minify api={api} />);
         expect(wrapper.find('input').props().type).toBe('text');
         expect(wrapper.find('button').text()).toBe('Minify');
-        expect(wrapper.exists('p')).toBe(false);
+        expect(wrapper.exists('a')).toBe(false);
     });
 });
 
@@ -41,7 +41,8 @@ describe('on clicking "minify"', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(testUrl);
-            expect(wrapper.find('p').text()).toBe('https://mini.fy/randomhash');
+            expect(wrapper.find('a').text()).toBe('https://mini.fy/randomhash');
+            expect(wrapper.find('a').props().href).toBe('https://mini.fy/randomhash');
         });
     });
     describe('on invalid response', () => {
