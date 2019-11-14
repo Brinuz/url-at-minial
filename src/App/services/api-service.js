@@ -6,7 +6,7 @@ class ApiService {
     }
 
     minify(url, expiration = 60) {
-        return Axios.post(`${this.apiUrl}api/minify`, { url, expiration });
+        return Axios.post(`${this.apiUrl}/minify`, { url, expiration });
     }
 }
 
