@@ -15,7 +15,8 @@
     "test:verbose": "jest --verbose",
     "test:commit": "npm run lint && npm run test:verbose && npm outdated",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --hot --open --devtool source-map"
+    "start:dev": "webpack-dev-server --mode development --hot --open --devtool source-map",
+    "start": "serve -s dist"
   },
   "author": "Bruno Monteiro",
   "license": "MIT",
@@ -47,6 +48,7 @@
     "eslint-plugin-react-hooks": "^2.2.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
+    "serve": "^11.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
