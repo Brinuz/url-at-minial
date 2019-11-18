@@ -1,0 +1,7 @@
+# Build the Go API
+FROM golang:latest AS builder
+ADD . /proxy
+WORKDIR /proxy/cmd
+RUN go mod download
+WORKDIR /proxy/cmd
+RUN go build -o proxy
