@@ -1,3 +1,6 @@
 build:
   docker:
     web: dockerfile
+setup:
+  config:
+    STATIC_CONTENT_PATH: dist
