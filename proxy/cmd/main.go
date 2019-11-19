@@ -19,7 +19,7 @@ func main() {
 func getPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8090"
+		port = "8080"
 	}
 	return fmt.Sprintf(":%s", port)
 }
