@@ -5,10 +5,10 @@ describe('API', () => {
     it('fetchs minified url from the API', (done) => {
         Axios.post = jest.fn().mockResolvedValue({ status: 201 });
 
-        new ApiService('http://localhost')
+        ApiService
             .minify('https://www.google.com')
             .then((response) => {
-                expect(Axios.post).toHaveBeenCalledWith('http://localhost/minify', {
+                expect(Axios.post).toHaveBeenCalledWith('/minify', {
                     url: 'https://www.google.com',
                     expiration: 60,
                 });
