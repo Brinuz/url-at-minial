@@ -1,14 +1,14 @@
 # URL Minifier
 
 ## Run locally on docker
-##### Build container 
-`> docker build -t url-at-minimal -f dockerfile .`
+##### Build image 
+`> docker build -t url-at-minimal:latest -f dockerfile .`
 
 ##### Run container
 ###### Attached: 
-`> docker run -p 3000:8080 --env STATIC_CONTENT_PATH=dist -it url-at-minimal`
+`> docker run -p 3000:8080 -it --name url-at-minimal --env STATIC_CONTENT_PATH=dist url-at-minimal:latest`
 ###### Dettached: 
-`> docker run -p 3000:8080 --env STATIC_CONTENT_PATH=dist -d url-at-minimal`
+`> docker run -p 3000:8080 -d --name url-at-minimal --env STATIC_CONTENT_PATH=dist url-at-minimal:latest`
 
 ##### Interact with container
-`> docker exec -it <CONTAINER_ID> url-at-minimal sh`
+`> docker exec -it url-at-minimal sh`

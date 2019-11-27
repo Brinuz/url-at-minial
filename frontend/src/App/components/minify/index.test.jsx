@@ -6,8 +6,7 @@ import ApiService from '../../services/api-service';
 
 describe('initial renders', () => {
     it('renders all the required inputs', () => {
-        const api = new ApiService('');
-        const wrapper = mount(<Minify api={api} />);
+        const wrapper = mount(<Minify />);
         expect(wrapper.find('input').props().type).toBe('text');
         expect(wrapper.find('button').text()).toBe('Minify');
         expect(wrapper.exists('a')).toBe(false);
@@ -19,14 +18,14 @@ describe('on clicking "minify"', () => {
     let api;
 
     beforeEach(() => {
-        api = new ApiService('');
+        jest.clearAllMocks();
         wrapper = mount(<Minify api={api} />);
     });
 
     describe('on valid response', () => {
         it('renders minified url', async () => {
             const testUrl = 'http://www.google.com';
-            const spy = jest.spyOn(api, 'minify').mockResolvedValue(
+            const spy = jest.spyOn(ApiService, 'minify').mockResolvedValue(
                 {
                     status: 204,
                     data: { minified: 'https://mini.fy/randomhash' },
@@ -47,7 +46,7 @@ describe('on clicking "minify"', () => {
     });
     describe('on invalid response', () => {
         it('renders error', async () => {
-            const spy = jest.spyOn(api, 'minify').mockRejectedValue();
+            const spy = jest.spyOn(ApiService, 'minify').mockRejectedValue();
 
             await act(async () => {
                 wrapper.find('button').simulate('click');

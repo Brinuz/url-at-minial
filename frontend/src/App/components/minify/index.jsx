@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import ApiService from '../../services/api-service';
 
-const Minify = ({ api }) => {
+const Minify = () => {
     const [url, setUrl] = useState('');
     const [error, setError] = useState(false);
     const [minified, setMinified] = useState();
@@ -13,7 +12,7 @@ const Minify = ({ api }) => {
     };
 
     const onClickHandler = () => {
-        api.minify(url)
+        ApiService.minify(url)
             .then((resp) => setMinified(resp.data.minified))
             .catch(() => setError(true));
     };
@@ -27,7 +26,4 @@ const Minify = ({ api }) => {
     );
 };
 
-Minify.propTypes = {
-    api: PropTypes.instanceOf(ApiService).isRequired,
-};
 export default Minify;
