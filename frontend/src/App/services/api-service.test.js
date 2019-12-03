@@ -8,7 +8,7 @@ describe('API', () => {
         ApiService
             .minify('https://www.google.com')
             .then((response) => {
-                expect(Axios.post).toHaveBeenCalledWith('/minify', {
+                expect(Axios.post).toHaveBeenCalledWith('/api/minify', {
                     url: 'https://www.google.com',
                     expiration: 60,
                 });
