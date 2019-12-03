@@ -11,6 +11,8 @@ describe('API', () => {
                 expect(Axios.post).toHaveBeenCalledWith('/api/minify', {
                     url: 'https://www.google.com',
                     expiration: 60,
+                }, {
+                    'Content-Type': 'application/json'
                 });
                 expect(response.status).toBe(201);
                 done();
