@@ -12,7 +12,7 @@ import (
 
 func TestHealthCheck(t *testing.T) {
 	// Given
-	router := router.New(&MockStaticServer{})
+	router := router.New(&MockStaticServer{}, &MockReverseAPI{})
 	ms := httptest.NewServer(router.Handler())
 	defer ms.Close()
 
@@ -24,6 +24,26 @@ func TestHealthCheck(t *testing.T) {
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 }
 
+func TestApiReverseRoute(t *testing.T) {
+	// Given
+	mockReverse := &MockReverseAPI{
+		ReverseFn: func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte("Reversed!"))
+		},
+	}
+	router := router.New(&MockStaticServer{}, mockReverse)
+	ms := httptest.NewServer(router.Handler())
+	defer ms.Close()
+
+	// When
+	resp, err := http.Get(ms.URL + "/api/endpoint")
+
+	// Then
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
+	assert.Equal(t, 1, mockReverse.ReverseFnCount)
+}
+
 func TestStaticContentRoute(t *testing.T) {
 	// Given
 	mockStaticServer := &MockStaticServer{
@@ -31,7 +51,7 @@ func TestStaticContentRoute(t *testing.T) {
 			return http.FileServer(http.Dir("../../../stub"))
 		},
 	}
-	router := router.New(mockStaticServer)
+	router := router.New(mockStaticServer, &MockReverseAPI{})
 	ms := httptest.NewServer(router.Handler())
 	defer ms.Close()
 
@@ -54,4 +74,14 @@ type MockStaticServer struct {
 func (m *MockStaticServer) Content() http.Handler {
 	m.ContentFnCount++
 	return m.ContentFn()
+}
+
+type MockReverseAPI struct {
+	ReverseFn      func(http.ResponseWriter, *http.Request)
+	ReverseFnCount int
+}
+
+func (m *MockReverseAPI) Reverse(w http.ResponseWriter, r *http.Request) {
+	m.ReverseFnCount++
+	m.ReverseFn(w, r)
 }

@@ -13,7 +13,7 @@ const Minify = () => {
 
     const onClickHandler = () => {
         ApiService.minify(url)
-            .then((resp) => setMinified(resp.data.minified))
+            .then((resp) => setMinified(resp.data.URL))
             .catch(() => setError(true));
     };
 

@@ -28,7 +28,7 @@ describe('on clicking "minify"', () => {
             const spy = jest.spyOn(ApiService, 'minify').mockResolvedValue(
                 {
                     status: 204,
-                    data: { minified: 'https://mini.fy/randomhash' },
+                    data: { URL: 'https://mini.fy/randomhash' },
                 },
             );
 

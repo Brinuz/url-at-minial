@@ -1,3 +1,7 @@
+setup:
+  config:
+    API_URL: https://url-at-minimal-api.herokuapp.com/
+    STATIC_CONTENT_PATH: dist
 build:
   docker:
     web: dockerfile

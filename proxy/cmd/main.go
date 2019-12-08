@@ -4,14 +4,18 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"url-at-minimal-server/internal/adapters/router"
+	"url-at-minimal-server/internal/features/reverse"
 	"url-at-minimal-server/internal/features/serve"
 )
 
 func main() {
-	router := router.New(serve.New(getStaticContentPath()))
-
+	router := router.New(
+		serve.New(getStaticContentPath()),
+		reverse.New(*getAPIURL()),
+	)
 	println("I'm up!")
 	log.Fatal(http.ListenAndServe(getPort(), router.Handler()))
 }
@@ -22,6 +26,18 @@ func getPort() string {
 		port = "8080"
 	}
 	return fmt.Sprintf(":%s", port)
+}
+
+func getAPIURL() *url.URL {
+	apiURL := os.Getenv("API_URL")
+	if apiURL == "" {
+		log.Fatal("Missing env variable: API_URL")
+	}
+	url, err := url.Parse(apiURL)
+	if err != nil {
+		log.Fatal("Invalid url from env variable: API_URL")
+	}
+	return url
 }
 
 func getStaticContentPath() string {
