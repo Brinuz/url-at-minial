@@ -1,4 +1,4 @@
-# URL Minifier (https://www.urladept.com)
+# URL Minifier (http://www.urldome.com)
 
 ## Run locally on docker
 ##### Build image 
