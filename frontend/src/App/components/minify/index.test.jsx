@@ -15,11 +15,10 @@ describe('initial renders', () => {
 
 describe('on clicking "minify"', () => {
     let wrapper;
-    let api;
 
     beforeEach(() => {
         jest.clearAllMocks();
-        wrapper = mount(<Minify api={api} />);
+        wrapper = mount(<Minify />);
     });
 
     describe('on valid response', () => {
@@ -28,7 +27,7 @@ describe('on clicking "minify"', () => {
             const spy = jest.spyOn(ApiService, 'minify').mockResolvedValue(
                 {
                     status: 204,
-                    data: { URL: 'https://mini.fy/randomhash' },
+                    data: { URL: 'randomhash' },
                 },
             );
 
@@ -40,8 +39,8 @@ describe('on clicking "minify"', () => {
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(testUrl);
-            expect(wrapper.find('a').text()).toBe('https://mini.fy/randomhash');
-            expect(wrapper.find('a').props().href).toBe('https://mini.fy/randomhash');
+            expect(wrapper.find('a').text()).toBe('urldo.me/randomhash');
+            expect(wrapper.find('a').props().href).toBe('http://urldo.me/randomhash');
         });
     });
     describe('on invalid response', () => {

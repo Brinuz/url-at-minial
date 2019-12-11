@@ -12,7 +12,7 @@ describe('API', () => {
                     url: 'https://www.google.com',
                     expiration: 60,
                 }, {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 });
                 expect(response.status).toBe(201);
                 done();
