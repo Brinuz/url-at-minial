@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import ApiService from '../../services/api-service';
 
 const Minify = () => {
@@ -18,12 +19,18 @@ const Minify = () => {
     };
 
     return (
-        <div>
+        <MinifyStyle>
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
             <button type="button" onClick={onClickHandler}>Minify</button>
             {displayMinified()}
-        </div>
+        </MinifyStyle>
     );
 };
+
+const MinifyStyle = styled.div`
+    padding-top: 20%;
+    width: 100%;
+    text-align: center;
+`;
 
 export default Minify;

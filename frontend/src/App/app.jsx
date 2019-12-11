@@ -5,10 +5,13 @@ import ApiService from './services/api-service';
 
 const App = () => (
     <BodyContainerStyle>
-        <Minify api={new ApiService('')} />
+        <Minify />
     </BodyContainerStyle>
 );
 
-const BodyContainerStyle = styled.div``;
+const BodyContainerStyle = styled.div`
+    background-color: #e8e8e8;
+    height: 100%;
+`;
 
 export default App;
