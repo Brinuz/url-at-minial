@@ -8,7 +8,7 @@ const Minify = () => {
 
     const displayMinified = () => {
         if (error) return <p>Couldn&apos;t minify url</p>;
-        return minified && <a href={minified}>{minified}</a>;
+        return minified && <a href={"http://urldo.me/" + minified}>{"urldo.me/" + minified}</a>;
     };
 
     const onClickHandler = () => {
