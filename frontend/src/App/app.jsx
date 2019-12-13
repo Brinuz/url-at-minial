@@ -9,7 +9,7 @@ const App = () => (
 );
 
 const BodyContainerStyle = styled.div`
-    background-color: #e8e8e8;
+    background-color: #EAEAEA;
     height: 100%;
 `;
 

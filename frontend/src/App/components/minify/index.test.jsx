@@ -8,6 +8,7 @@ describe('initial renders', () => {
     it('renders all the required inputs', () => {
         const wrapper = mount(<Minify />);
         expect(wrapper.find('input').props().type).toBe('text');
+        expect(wrapper.find('input').props().placeholder).toBe('URL');
         expect(wrapper.find('button').text()).toBe('Minify');
         expect(wrapper.exists('a')).toBe(false);
     });
