@@ -13,3 +13,11 @@ func ForceHTTPS(next http.Handler) http.Handler {
 		next.ServeHTTP(w, r)
 	})
 }
+
+// HSTS middleware adds HSTS header to the response
+func HSTS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Strict-Transport-Security", "max-age=31536000")
+		next.ServeHTTP(w, r)
+	})
+}

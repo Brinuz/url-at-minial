@@ -39,3 +39,17 @@ func TestNoNeedForceSSL(t *testing.T) {
 	// Then
 	assert.Equal(t, http.StatusOK, rec.Code)
 }
+
+func TestHSTS(t *testing.T) {
+	// Given
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/", nil)
+	handler := http.HandlerFunc(ok)
+
+	// When
+	middleware.HSTS(handler).ServeHTTP(rec, req)
+
+	// Then
+	assert.Equal(t, http.StatusOK, rec.Code)
+	assert.Equal(t, "max-age=31536000", rec.Header().Get("Strict-Transport-Security"))
+}
