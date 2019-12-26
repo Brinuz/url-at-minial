@@ -31,11 +31,12 @@ func getPort() string {
 }
 
 func getMiddlewares() []router.Middleware {
+	mws := []router.Middleware{middleware.ForceHTTPS}
 	env := os.Getenv("ENVIRONMENT")
 	if env == "production" {
-		return []router.Middleware{middleware.ForceHTTPS}
+		mws = append(mws, middleware.HSTS)
 	}
-	return []router.Middleware{}
+	return mws
 }
 
 func getAPIURL() *url.URL {
