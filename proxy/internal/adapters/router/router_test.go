@@ -12,7 +12,7 @@ import (
 
 func TestHealthCheck(t *testing.T) {
 	// Given
-	router := router.New(&MockStaticServer{}, &MockReverseAPI{})
+	router := router.New(&MockStaticServer{}, &MockReverseAPI{}, []router.Middleware{})
 	ms := httptest.NewServer(router.Handler())
 	defer ms.Close()
 
@@ -24,6 +24,29 @@ func TestHealthCheck(t *testing.T) {
 	assert.Equal(t, http.StatusOK, resp.StatusCode)
 }
 
+func TestMiddlewares(t *testing.T) {
+	// Given
+	middlewareCalled := 0
+	dummyMiddleware := func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			middlewareCalled++
+			next.ServeHTTP(w, r)
+		})
+	}
+	middlewares := []router.Middleware{dummyMiddleware, dummyMiddleware}
+	router := router.New(&MockStaticServer{}, &MockReverseAPI{}, middlewares)
+	ms := httptest.NewServer(router.Handler())
+	defer ms.Close()
+
+	// When
+	resp, err := http.Get(ms.URL + "/health-check")
+
+	// Then
+	assert.NoError(t, err)
+	assert.Equal(t, http.StatusOK, resp.StatusCode)
+	assert.Equal(t, 2, middlewareCalled)
+}
+
 func TestApiReverseRoute(t *testing.T) {
 	// Given
 	mockReverse := &MockReverseAPI{
@@ -31,7 +54,7 @@ func TestApiReverseRoute(t *testing.T) {
 			w.Write([]byte("Reversed!"))
 		},
 	}
-	router := router.New(&MockStaticServer{}, mockReverse)
+	router := router.New(&MockStaticServer{}, mockReverse, []router.Middleware{})
 	ms := httptest.NewServer(router.Handler())
 	defer ms.Close()
 
@@ -51,7 +74,7 @@ func TestStaticContentRoute(t *testing.T) {
 			return http.FileServer(http.Dir("../../../stub"))
 		},
 	}
-	router := router.New(mockStaticServer, &MockReverseAPI{})
+	router := router.New(mockStaticServer, &MockReverseAPI{}, []router.Middleware{})
 	ms := httptest.NewServer(router.Handler())
 	defer ms.Close()
 

@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"url-at-minimal-server/internal/adapters/middleware"
 	"url-at-minimal-server/internal/adapters/router"
 	"url-at-minimal-server/internal/features/reverse"
 	"url-at-minimal-server/internal/features/serve"
@@ -15,6 +16,7 @@ func main() {
 	router := router.New(
 		serve.New(getStaticContentPath()),
 		reverse.New(*getAPIURL()),
+		getMiddlewares(),
 	)
 	println("I'm up!")
 	log.Fatal(http.ListenAndServe(getPort(), router.Handler()))
@@ -26,6 +28,14 @@ func getPort() string {
 		port = "8080"
 	}
 	return fmt.Sprintf(":%s", port)
+}
+
+func getMiddlewares() []router.Middleware {
+	env := os.Getenv("ENVIRONMENT")
+	if env == "production" {
+		return []router.Middleware{middleware.ForceHTTPS}
+	}
+	return []router.Middleware{}
 }
 
 func getAPIURL() *url.URL {
