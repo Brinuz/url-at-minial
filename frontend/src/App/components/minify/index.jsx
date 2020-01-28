@@ -20,7 +20,8 @@ const Minify = () => {
 
     return (
         <MinifyStyle>
-            <Input placeholder="URL" type="text" value={url} onChange={(e) => setUrl(e.target.value)} />&nbsp;
+            <Input placeholder="URL" type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
+            &nbsp;
             <Button type="button" onClick={onClickHandler}>Minify</Button>
             {displayMinified()}
         </MinifyStyle>

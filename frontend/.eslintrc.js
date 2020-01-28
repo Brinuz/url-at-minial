@@ -1,10 +1,18 @@
 module.exports = {
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "env": {
         "browser": true,
         "es6": true,
         "jest": true
     },
-    "extends": "airbnb",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly"
@@ -21,10 +29,4 @@ module.exports = {
         "react-hooks",
         "html"
     ],
-    "rules": {
-        "linebreak-style": 0,
-        "react/jsx-indent": ["error", 4],
-        "react/jsx-indent-props": ["error", 4],
-        "indent": ["error", 4, { "ignoredNodes": ["JSXElement"] }],
-    }
 };
