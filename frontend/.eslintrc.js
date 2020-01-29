@@ -12,7 +12,8 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:testing-library/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -29,6 +30,10 @@ module.exports = {
         "react",
         "react-hooks",
         "html",
-        "jest-dom"
+        "jest-dom",
+        "testing-library"
     ],
+    "rules": {
+        "quotes": ["error", "double"]
+    }
 };

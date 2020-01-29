@@ -1,5 +1,5 @@
 module.exports = {
-    coverageDirectory: 'coverage',
+    coverageDirectory: "coverage",
     moduleFileExtensions: [
         'js',
         'jsx',
