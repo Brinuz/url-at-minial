@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import ApiService from '../../services/api-service';
+import React, { useState } from "react";
+import styled from "styled-components";
+import ApiService from "../../services/api-service";
 
 const Minify = () => {
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState("");
     const [error, setError] = useState(false);
     const [minified, setMinified] = useState();
 

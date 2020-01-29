@@ -1,10 +1,10 @@
-import React from 'react';
-import { render, fireEvent, cleanup } from '@testing-library/react'
-import Minify from './index';
-import ApiService from '../../services/api-service';
+import React from "react";
+import { render, fireEvent, cleanup } from "@testing-library/react"
+import Minify from "./index";
+import ApiService from "../../services/api-service";
 
-describe('initial renders', () => {
-    it('renders all the required fields', () => {
+describe("initial renders", () => {
+    it("renders all the required fields", () => {
         const { queryByPlaceholderText, queryByText } = render(<Minify />);
         expect(queryByPlaceholderText("URL")).toHaveProperty("type", "text");
         expect(queryByText("Minify")).toHaveProperty("type", "button");
@@ -12,19 +12,19 @@ describe('initial renders', () => {
     });
 });
 
-describe('on clicking "minify"', () => {
+describe("on clicking \"minify\"", () => {
     beforeEach(() => {
         jest.clearAllMocks();
         cleanup();
     });
 
-    describe('on valid response', () => {
-        it('renders minified url', async () => {
-            const testUrl = 'http://www.google.com';
-            const spy = jest.spyOn(ApiService, 'minify').mockResolvedValue(
+    describe("on valid response", () => {
+        it("renders minified url", async () => {
+            const testUrl = "http://www.google.com";
+            const spy = jest.spyOn(ApiService, "minify").mockResolvedValue(
                 {
                     status: 204,
-                    data: { URL: 'randomhash' },
+                    data: { URL: "randomhash" },
                 },
             );
             const { getByPlaceholderText, findByText } = render(<Minify />)
@@ -39,9 +39,9 @@ describe('on clicking "minify"', () => {
 
     });
 
-    describe('on invalid response', () => {
-        it('renders error', async () => {
-            const spy = jest.spyOn(ApiService, 'minify').mockRejectedValue();
+    describe("on invalid response", () => {
+        it("renders error", async () => {
+            const spy = jest.spyOn(ApiService, "minify").mockRejectedValue();
             const { findByText, getByText } = render(<Minify />)
 
             fireEvent.click(getByText("Minify"))
