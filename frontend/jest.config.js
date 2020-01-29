@@ -5,6 +5,6 @@ module.exports = {
         'jsx',
         'json',
     ],
-    setupFilesAfterEnv: ['<rootDir>/src/enzyme.js'],
+    setupFilesAfterEnv: ['<rootDir>/setup_tests.js'],
     transformIgnorePatterns: ['<rootDir>/node_modules/'],
 };

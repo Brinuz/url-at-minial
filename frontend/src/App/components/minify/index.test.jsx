@@ -1,25 +1,21 @@
-import { mount } from 'enzyme';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
+import { render, fireEvent, cleanup } from '@testing-library/react'
 import Minify from './index';
 import ApiService from '../../services/api-service';
 
 describe('initial renders', () => {
-    it('renders all the required inputs', () => {
-        const wrapper = mount(<Minify />);
-        expect(wrapper.find('input').props().type).toBe('text');
-        expect(wrapper.find('input').props().placeholder).toBe('URL');
-        expect(wrapper.find('button').text()).toBe('Minify');
-        expect(wrapper.exists('a')).toBe(false);
+    it('renders all the required fields', () => {
+        const { queryByPlaceholderText, queryByText } = render(<Minify />);
+        expect(queryByPlaceholderText("URL")).toHaveProperty("type", "text");
+        expect(queryByText("Minify")).toHaveProperty("type", "button");
+        expect(queryByText("Couldn't minify url")).toBeNull();
     });
 });
 
 describe('on clicking "minify"', () => {
-    let wrapper;
-
     beforeEach(() => {
         jest.clearAllMocks();
-        wrapper = mount(<Minify />);
+        cleanup();
     });
 
     describe('on valid response', () => {
@@ -31,30 +27,27 @@ describe('on clicking "minify"', () => {
                     data: { URL: 'randomhash' },
                 },
             );
+            const { getByPlaceholderText, findByText } = render(<Minify />)
 
-            wrapper.find('input').simulate('change', { target: { value: testUrl } });
-            await act(async () => {
-                wrapper.find('button').simulate('click');
-            });
-            wrapper.update();
+            fireEvent.change(getByPlaceholderText("URL"), { target: { value: testUrl } });
+            fireEvent.click(await findByText("Minify"))
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(testUrl);
-            expect(wrapper.find('a').text()).toBe('urldo.me/randomhash');
-            expect(wrapper.find('a').props().href).toBe('http://urldo.me/randomhash');
+            expect(await findByText("urldo.me/randomhash")).toHaveProperty("href", "http://urldo.me/randomhash");
         });
+
     });
+
     describe('on invalid response', () => {
         it('renders error', async () => {
             const spy = jest.spyOn(ApiService, 'minify').mockRejectedValue();
+            const { findByText, getByText } = render(<Minify />)
 
-            await act(async () => {
-                wrapper.find('button').simulate('click');
-            });
-            wrapper.update();
+            fireEvent.click(getByText("Minify"))
 
             expect(spy).toHaveBeenCalledTimes(1);
-            expect(wrapper.find('p').text()).toBe('Couldn\'t minify url');
+            expect(await findByText("Couldn't minify url")).toBeTruthy();
         });
     });
 });
