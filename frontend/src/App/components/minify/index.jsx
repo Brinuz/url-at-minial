@@ -31,8 +31,8 @@ const Minify = () => {
 const Button = styled.button`
     background-color: #30e3f4;
     border-color: #30e3f4;
-    padding: 5px 15px;
-    border-radius: 2px;
+    padding: 0.125rem 0.85rem;
+    border-radius: 0.125rem;
     color: #FFFFFF;
     outline: none;
     cursor: pointer;
@@ -41,23 +41,32 @@ const Button = styled.button`
         border-color: #FFFFFF;
         color: #30e3f4;
     }
+    @media only screen and (min-width: 768px) {
+        padding: 0.3125rem 1rem;
+    }
 `;
 
 const Input = styled.input`
     width: 100%;
     background-color: transparent;
-    max-width: 300px;
-    padding: 5px 2px;
-    border-width: 0 0 1px 0;
+    max-width: 18.75rem;
+    padding: 0.125rem 0.125rem;
+    border-width: 0 0 0.0625rem 0;
     border-color: #30e3f4;
     outline: none;
     color: #FFFFFF;
+    @media only screen and (min-width: 768px) {
+        padding: 0.3125rem 0.125rem;
+    }
 `;
 
 const MinifyStyle = styled.div`
     margin: 3rem 0;
     width: 100%;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
 `;
 
 export default Minify;
