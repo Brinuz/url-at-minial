@@ -29,16 +29,17 @@ const Minify = () => {
 };
 
 const Button = styled.button`
-    background-color: #EF8354;
-    border-color: #EF8354;
+    background-color: #30e3f4;
+    border-color: #30e3f4;
     padding: 5px 15px;
     border-radius: 2px;
-    color: #EAEAEA;
+    color: #FFFFFF;
     outline: none;
     cursor: pointer;
     &:hover {
-        background-color: #E8C547;
-        border-color: #E8C547;
+        background-color: #FFFFFF;
+        border-color: #FFFFFF;
+        color: #30e3f4;
     }
 `;
 
@@ -48,12 +49,13 @@ const Input = styled.input`
     max-width: 300px;
     padding: 5px 2px;
     border-width: 0 0 1px 0;
-    border-color: #EF8354;
+    border-color: #30e3f4;
     outline: none;
+    color: #FFFFFF;
 `;
 
 const MinifyStyle = styled.div`
-    padding-top: 20%;
+    margin: 3rem 0;
     width: 100%;
     text-align: center;
 `;
