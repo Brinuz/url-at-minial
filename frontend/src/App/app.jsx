@@ -14,7 +14,7 @@ const App = () => (
 
 const BodyContainerStyle = styled.div`
     background-color: #041414;
-    padding: 2rem;
+    padding: 0 2rem;
     height: 100%;
     color: #FFFFFF;
 `;
