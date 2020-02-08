@@ -31,7 +31,7 @@ func getPort() string {
 }
 
 func getMiddlewares() []router.Middleware {
-	mws := []router.Middleware{middleware.ForceHTTPS}
+	mws := []router.Middleware{}
 	env := os.Getenv("ENVIRONMENT")
 	if env == "production" {
 		mws = append(mws, middleware.HSTS)
