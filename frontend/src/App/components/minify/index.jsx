@@ -9,7 +9,7 @@ const Minify = () => {
 
     const displayMinified = () => {
         if (error) return <p>Couldn&apos;t minify url</p>;
-        return minified && <p><a href={`http://urldo.me/${minified}`}>{`urldo.me/${minified}`}</a></p>;
+        return minified && <p><a href={`https://urldo.me/${minified}`}>{`urldo.me/${minified}`}</a></p>;
     };
 
     const onClickHandler = () => {
@@ -19,26 +19,28 @@ const Minify = () => {
     };
 
     return (
-        <MinifyStyle>
-            <Input placeholder="URL" type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
-            &nbsp;
-            <Button type="button" onClick={onClickHandler}>Minify</Button>
+        <>
+            <MinifyStyle>
+                <Input placeholder="URL" type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
+                <Button type="button" onClick={onClickHandler}>Minify</Button>
+            </MinifyStyle>
             {displayMinified()}
-        </MinifyStyle>
+        </>
     );
 };
 
 const Button = styled.button`
     background-color: #30e3f4;
-    border-color: #30e3f4;
+    border: none;
     padding: 0.125rem 0.85rem;
-    border-radius: 0.125rem;
+    border-radius: 0.5rem;
     color: #FFFFFF;
     outline: none;
     cursor: pointer;
+    box-sizing: padding-box;
+    transition: color 0.5s, background-color 0.5s;
     &:hover {
         background-color: #FFFFFF;
-        border-color: #FFFFFF;
         color: #30e3f4;
     }
     @media only screen and (min-width: 768px) {
@@ -48,20 +50,21 @@ const Button = styled.button`
 
 const Input = styled.input`
     width: 100%;
-    background-color: transparent;
+    background-color: #FFFFFF;
     max-width: 18.75rem;
-    padding: 0.125rem 0.125rem;
-    border-width: 0 0 0.0625rem 0;
-    border-color: #30e3f4;
+    padding: 0.125rem 0.3125rem;
+    border: none;
+    border-radius: 0.5rem;
     outline: none;
-    color: #FFFFFF;
+    color: #041414;
+    margin: 0 0.3125rem;
     @media only screen and (min-width: 768px) {
-        padding: 0.3125rem 0.125rem;
+        padding: 0.3125rem;
     }
 `;
 
 const MinifyStyle = styled.div`
-    margin: 3rem 0;
+    margin: 3rem 0 0 0;
     width: 100%;
     display: flex;
     align-items: center;
