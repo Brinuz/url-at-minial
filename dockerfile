@@ -1,5 +1,5 @@
-# Building proxy container
-FROM golang:latest AS proxy_builder
+# Building server container
+FROM golang:latest AS server_builder
 ADD . /app
 WORKDIR /app/server
 RUN go mod download
