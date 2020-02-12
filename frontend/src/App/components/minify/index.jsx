@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ApiService from "../../services/api-service";
+import loading from "../../../images/loading.svg";
 
 const Minify = () => {
     const [url, setUrl] = useState("");
     const [error, setError] = useState(false);
     const [minified, setMinified] = useState();
+    const [loading, setLoading] = useState(false);
 
     const displayMinified = () => {
         if (error) return <p>Couldn&apos;t minify url</p>;
@@ -13,16 +15,18 @@ const Minify = () => {
     };
 
     const onClickHandler = () => {
+        setLoading(true);
         ApiService.minify(url)
             .then((resp) => setMinified(resp.data.URL))
-            .catch(() => setError(true));
+            .catch(() => setError(true))
+            .then(() => setLoading(false));
     };
 
     return (
         <>
             <MinifyStyle>
                 <Input placeholder="URL" type="text" value={url} onChange={(e) => setUrl(e.target.value)} />
-                <Button type="button" onClick={onClickHandler}>Minify</Button>
+                <Button disabled={loading} type="button" onClick={onClickHandler}>Minify</Button>
             </MinifyStyle>
             {displayMinified()}
         </>
@@ -42,6 +46,12 @@ const Button = styled.button`
     &:hover {
         background-color: #FFFFFF;
         color: #30e3f4;
+    }
+    &:disabled {
+        background: url("${loading}") center no-repeat;
+        background-color: #FFFFFF;
+        background-size: 40px;
+        color: transparent;
     }
     @media only screen and (min-width: 768px) {
         padding: 0.3125rem 1rem;
