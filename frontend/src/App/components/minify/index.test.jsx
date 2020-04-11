@@ -27,14 +27,14 @@ describe("on clicking \"minify\"", () => {
                     data: { URL: "randomhash" },
                 },
             );
-            const { getByPlaceholderText, findByText } = render(<Minify />)
+            const { getByPlaceholderText, findByText, getByText } = render(<Minify />)
 
             fireEvent.change(getByPlaceholderText("URL"), { target: { value: testUrl } });
-            fireEvent.click(await findByText("Minify"))
+            fireEvent.click(getByText("Minify"))
 
             expect(spy).toHaveBeenCalledTimes(1);
             expect(spy).toHaveBeenCalledWith(testUrl);
-            expect(await findByText("urldo.me/randomhash")).toHaveProperty("href", "http://urldo.me/randomhash");
+            expect(await findByText("urldo.me/randomhash")).toHaveProperty("href", "https://urldo.me/randomhash");
         });
 
     });
